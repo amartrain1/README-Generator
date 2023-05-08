@@ -53,10 +53,10 @@ inquirer
         console.log(data);
         const {title, description, installation, usage, license, contributing, tests, github, email} = data;
         const pageData = 
-`# ${data.title}
+`# ${title}
 
 ## Description
-${data.description}
+${description}
 
 ## Table Of Contents
 - [Installation](#installation)
@@ -67,21 +67,21 @@ ${data.description}
 - [Contact Me](#contact-me)
 
 ## Installation
-${data.installation}
+${installation}
 
 ## Usage
-${data.usage}
+${usage}
 
 ## License
-${data.license}
+${license}
 
 ## Contributors
-${data.contributing}
+${contributing}
 
 ## Tests
-${data.tests}
+${tests}
 
 ## Contact Me
-You can view my GutHub portfolio at https://github.com/${data.github} or you can email me at ${data.email}.`;
+You can view my GutHub portfolio at https://github.com/${github} or you can email me at ${email}.`;
         fs.writeFile('README.md', pageData, (err) => err ? console.log(`Error: ${err}`) : console.log('Success!'));
     });
