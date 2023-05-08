@@ -1,78 +1,87 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
+const fs = require('fs');
 
-// TODO: Create an array of questions for user input
-const questions = [
-    {
-        type: 'input',
-        name: 'title',
-        message: 'What is the title of your project?'
-    },
-    {
-        type: 'input',
-        name: 'description',
-        message: 'What is the description of your project?'
-    },
-    {
-        type: 'input',
-        name: 'table-of-contents',
-        message: 'What is your table of contents?'
-    },
-    {
-        type: 'input',
-        name: 'installation',
-        message: 'What is the installation process for the project?'
-    },
-    {
-        type: 'input',
-        name: 'usage',
-        message: 'How does a user use your application?'
-    },
-    {
-        type: 'input',
-        name: 'license',
-        message: 'What license does your application use?'
-    },
-    {
-        type: 'input',
-        name: 'contributing',
-        message: 'Who contributed to your project?'
-    },
-    {
-        type: 'input',
-        name: 'tests',
-        message: 'What tests did you run on your project?'
-    },
-    {
-        type: 'input',
-        name: 'github',
-        message: 'What is your github username?'
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'What is your email address?'
-    }
-];
+inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the title of your project?'
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'What is the description of your project?'
+        },
+        {
+            type: 'input',
+            name: 'installation',
+            message: 'What is the installation process for the project?'
+        },
+        {
+            type: 'input',
+            name: 'usage',
+            message: 'How does a user use your application?'
+        },
+        {
+            type: 'input',
+            name: 'license',
+            message: 'What license does your application use?'
+        },
+        {
+            type: 'input',
+            name: 'contributing',
+            message: 'Who contributed to your project?'
+        },
+        {
+            type: 'input',
+            name: 'tests',
+            message: 'What tests did you run on your project?'
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is your github username?'
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address?'
+        }
+    ])
+    .then((data) => {
+        console.log(data);
+        const {title, description, installation, usage, license, contributing, tests, github, email} = data;
+        const pageData = 
+`# ${data.title}
 
-// get a prompt on questions defined above
-askQuestions = () => {
-    return inquirer.prompt(questions);
-}
+## Description
+${data.description}
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
+## Table Of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributors](#contributors)
+- [Tests](#tests)
+- [Contact Me](#contact-me)
 
-}
+## Installation
+${data.installation}
 
-// TODO: Create a function to initialize app
-function init() {
-    askQuestions()
-        .then((answers) => writeToFile('README.md', answers))
-        .then(() => console.log('Successfully wrote to README.md'))
-        .catch((err) => console.log(`Error: ${err}`));
-}
+## Usage
+${data.usage}
 
-// Function call to initialize app
-init();
-askQuestions();
+## License
+${data.license}
+
+## Contributors
+${data.contributing}
+
+## Tests
+${data.tests}
+
+## Contact Me
+You can view my GutHub portfolio at https://github.com/${data.github} or you can email me at ${data.email}.`;
+        fs.writeFile('README.md', pageData, (err) => err ? console.log(`Error: ${err}`) : console.log('Success!'));
+    });

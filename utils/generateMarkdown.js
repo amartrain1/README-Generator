@@ -14,6 +14,29 @@ function renderLicenseSection(license) {}
 function generateMarkdown(data) {
   return `# ${data.title}
 
+## Description
+${data.description}
+
+## Table Of Contents
+${data.tableOfContents}
+
+## Installation
+${data.installation}
+
+## Usage
+${data.usage}
+
+## License
+${data.license}
+
+## Contributors
+${data.contributing}
+
+## Tests
+${data.tests}
+
+## Contact Me
+You can view my GutHub portfolio at https://github.com/${data.github} or you can email me at ${data.email}.
 `;
 }
 
