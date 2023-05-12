@@ -1,6 +1,15 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+function getBadgeIcon(name) {
+    const badges = {
+        mit: '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
+        mozilla: '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)',
+        boost: '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)'
+    }
+    return badges[name];
+};
+
 inquirer
     .prompt([
         {
@@ -54,17 +63,19 @@ inquirer
         const {title, description, installation, usage, license, contributing, tests, github, email} = data;
         const pageData = 
 `# ${title}
-
-## Description
-${description}
+${getBadgeIcon(license.toLowerCase())}
 
 ## Table Of Contents
+- [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
 - [Contributors](#contributors)
 - [Tests](#tests)
 - [Contact Me](#contact-me)
+
+## Description
+${description}
 
 ## Installation
 ${installation}
@@ -73,7 +84,7 @@ ${installation}
 ${usage}
 
 ## License
-${license}
+This project makes use of the ${license} license.
 
 ## Contributors
 ${contributing}
